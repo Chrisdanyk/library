@@ -1,0 +1,28 @@
+{
+  "libraryApp": {
+    "borrowedBook": {
+      "home": {
+        "title": "Borrowed Books",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Borrowed Book",
+        "createOrEditLabel": "Create or edit a Borrowed Book",
+        "notFound": "No Borrowed Books found"
+      },
+      "created": "A new Borrowed Book is created with identifier {{ param }}",
+      "updated": "A Borrowed Book is updated with identifier {{ param }}",
+      "deleted": "A Borrowed Book is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Borrowed Book {{ id }}?"
+      },
+      "detail": {
+        "title": "Borrowed Book"
+      },
+      "id": "ID",
+      "borrowDate": "Borrow Date",
+      "returnDate": "Return Date",
+      "status": "Status",
+      "book": "Book",
+      "client": "Client"
+    }
+  }
+}
