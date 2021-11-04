@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="info">
+      <h2 data-cy="infoDetailsHeading"><span jhiTranslate="libraryApp.info.detail.title">Info</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ info.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="libraryApp.info.address">Address</span></dt>
+        <dd>
+          <span>{{ info.address }}</span>
+        </dd>
+        <dt><span jhiTranslate="libraryApp.info.phone">Phone</span></dt>
+        <dd>
+          <span>{{ info.phone }}</span>
+        </dd>
+        <dt><span jhiTranslate="libraryApp.info.user">User</span></dt>
+        <dd>
+          <span>{{ info.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/info', info.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

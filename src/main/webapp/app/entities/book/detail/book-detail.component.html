@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="book">
+      <h2 data-cy="bookDetailsHeading"><span jhiTranslate="libraryApp.book.detail.title">Book</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ book.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="libraryApp.book.isbn">Isbn</span></dt>
+        <dd>
+          <span>{{ book.isbn }}</span>
+        </dd>
+        <dt><span jhiTranslate="libraryApp.book.name">Name</span></dt>
+        <dd>
+          <span>{{ book.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="libraryApp.book.publisherName">Publisher Name</span></dt>
+        <dd>
+          <span>{{ book.publisherName }}</span>
+        </dd>
+        <dt><span jhiTranslate="libraryApp.book.publisherUrl">Publisher Url</span></dt>
+        <dd>
+          <span>{{ book.publisherUrl }}</span>
+        </dd>
+        <dt><span jhiTranslate="libraryApp.book.publishYear">Publish Year</span></dt>
+        <dd>
+          <span>{{ book.publishYear }}</span>
+        </dd>
+        <dt><span jhiTranslate="libraryApp.book.copies">Copies</span></dt>
+        <dd>
+          <span>{{ book.copies }}</span>
+        </dd>
+        <dt><span jhiTranslate="libraryApp.book.cover">Cover</span></dt>
+        <dd>
+          <div *ngIf="book.cover">
+            <a (click)="openFile(book.cover, book.coverContentType)">
+              <img [src]="'data:' + book.coverContentType + ';base64,' + book.cover" style="max-width: 100%" alt="book image" />
+            </a>
+            {{ book.coverContentType }}, {{ byteSize(book.cover) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="libraryApp.book.author">Author</span></dt>
+        <dd>
+          <span>{{ book.author?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/book', book.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

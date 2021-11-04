@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="borrowedBook">
+      <h2 data-cy="borrowedBookDetailsHeading"><span jhiTranslate="libraryApp.borrowedBook.detail.title">Borrowed Book</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ borrowedBook.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="libraryApp.borrowedBook.borrowDate">Borrow Date</span></dt>
+        <dd>
+          <span>{{ borrowedBook.borrowDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="libraryApp.borrowedBook.returnDate">Return Date</span></dt>
+        <dd>
+          <span>{{ borrowedBook.returnDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="libraryApp.borrowedBook.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'libraryApp.Status.' + borrowedBook.status }}">{{ borrowedBook.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="libraryApp.borrowedBook.book">Book</span></dt>
+        <dd>
+          <div *ngIf="borrowedBook.book">
+            <a [routerLink]="['/book', borrowedBook.book?.id, 'view']">{{ borrowedBook.book?.name }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="libraryApp.borrowedBook.client">Client</span></dt>
+        <dd>
+          <span>{{ borrowedBook.client?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/borrowed-book', borrowedBook.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

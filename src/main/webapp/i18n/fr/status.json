@@ -1,0 +1,9 @@
+{
+  "libraryApp": {
+    "Status": {
+      "null": "",
+      "BORROWED": "BORROWED",
+      "RETURNED": "RETURNED"
+    }
+  }
+}

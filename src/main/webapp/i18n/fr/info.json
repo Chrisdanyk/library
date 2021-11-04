@@ -1,0 +1,26 @@
+{
+  "libraryApp": {
+    "info": {
+      "home": {
+        "title": "Infos",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Info",
+        "createOrEditLabel": "Créer ou éditer un Info",
+        "notFound": "Aucun Info trouvé"
+      },
+      "created": "Un nouveau Info a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Info avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Info avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Info {{ id }} ?"
+      },
+      "detail": {
+        "title": "Info"
+      },
+      "id": "ID",
+      "address": "Address",
+      "phone": "Phone",
+      "user": "User"
+    }
+  }
+}
