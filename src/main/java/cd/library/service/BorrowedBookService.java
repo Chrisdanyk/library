@@ -2,11 +2,13 @@ package cd.library.service;
 
 import cd.library.domain.BorrowedBook;
 import cd.library.repository.BorrowedBookRepository;
+import cd.library.security.AuthoritiesConstants;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,9 +72,17 @@ public class BorrowedBookService {
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
+    //    @Secured({AuthoritiesConstants.CLIENT, AuthoritiesConstants.ADMIN})
     public Page<BorrowedBook> findAll(Pageable pageable) {
         log.debug("Request to get all BorrowedBooks");
         return borrowedBookRepository.findAll(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    //    @Secured(AuthoritiesConstants.CLIENT)
+    public Page<BorrowedBook> findByClientIsCurrentUser(Pageable pageable) {
+        log.debug("Request to get all BorrowedBooks");
+        return borrowedBookRepository.findByClientIsCurrentUser(pageable);
     }
 
     /**

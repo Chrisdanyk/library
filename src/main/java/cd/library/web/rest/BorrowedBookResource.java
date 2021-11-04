@@ -1,14 +1,19 @@
 package cd.library.web.rest;
 
+import cd.library.domain.Authority;
 import cd.library.domain.BorrowedBook;
 import cd.library.repository.BorrowedBookRepository;
+import cd.library.security.AuthoritiesConstants;
+import cd.library.security.SecurityUtils;
 import cd.library.service.BorrowedBookService;
+import cd.library.service.UserService;
 import cd.library.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
@@ -42,10 +47,16 @@ public class BorrowedBookResource {
     private final BorrowedBookService borrowedBookService;
 
     private final BorrowedBookRepository borrowedBookRepository;
+    private final UserService userService;
 
-    public BorrowedBookResource(BorrowedBookService borrowedBookService, BorrowedBookRepository borrowedBookRepository) {
+    public BorrowedBookResource(
+        BorrowedBookService borrowedBookService,
+        BorrowedBookRepository borrowedBookRepository,
+        UserService userService
+    ) {
         this.borrowedBookService = borrowedBookService;
         this.borrowedBookRepository = borrowedBookRepository;
+        this.userService = userService;
     }
 
     /**
@@ -71,7 +82,7 @@ public class BorrowedBookResource {
     /**
      * {@code PUT  /borrowed-books/:id} : Updates an existing borrowedBook.
      *
-     * @param id the id of the borrowedBook to save.
+     * @param id           the id of the borrowedBook to save.
      * @param borrowedBook the borrowedBook to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated borrowedBook,
      * or with status {@code 400 (Bad Request)} if the borrowedBook is not valid,
@@ -105,7 +116,7 @@ public class BorrowedBookResource {
     /**
      * {@code PATCH  /borrowed-books/:id} : Partial updates given fields of an existing borrowedBook, field will ignore if it is null
      *
-     * @param id the id of the borrowedBook to save.
+     * @param id           the id of the borrowedBook to save.
      * @param borrowedBook the borrowedBook to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated borrowedBook,
      * or with status {@code 400 (Bad Request)} if the borrowedBook is not valid,
@@ -147,7 +158,22 @@ public class BorrowedBookResource {
     @GetMapping("/borrowed-books")
     public ResponseEntity<List<BorrowedBook>> getAllBorrowedBooks(Pageable pageable) {
         log.debug("REST request to get a page of BorrowedBooks");
-        Page<BorrowedBook> page = borrowedBookService.findAll(pageable);
+        /*
+        Page<BorrowedBook> page = null;
+        Set<Authority> authorities = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get()).get().getAuthorities();
+        log.warn("auth ->" + authorities);
+
+        if (authorities.contains(AuthoritiesConstants.ADMIN)) {
+            page = borrowedBookService.findAll(pageable);
+        }
+        if (authorities.contains(AuthoritiesConstants.CLIENT)) {
+            page = borrowedBookService.findByClientIsCurrentUser(pageable);
+
+        }
+       if (authorities.contains(AuthoritiesConstants.CLIENT) && authorities.contains(AuthoritiesConstants.ADMIN)) {
+            page = borrowedBookService.findAll(pageable);
+        }*/
+        Page<BorrowedBook> page = borrowedBookService.findByClientIsCurrentUser(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
