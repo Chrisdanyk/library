@@ -5,15 +5,20 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import * as dayjs from 'dayjs';
 
 import { AccountService } from 'app/core/auth/account.service';
+import { LoginService } from '../../login/login.service';
+import { Account } from '../../core/auth/account.model';
 
 @Component({
   selector: 'jhi-main',
   templateUrl: './main.component.html',
 })
 export class MainComponent implements OnInit {
+  isNavbarCollapsed = true;
+  account: Account | null = null;
   private renderer: Renderer2;
 
   constructor(
+    private loginService: LoginService,
     private accountService: AccountService,
     private titleService: Title,
     private router: Router,
@@ -26,7 +31,7 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
     // try to log in automatically
     this.accountService.identity().subscribe();
-
+    this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.updateTitle();
@@ -38,6 +43,20 @@ export class MainComponent implements OnInit {
       dayjs.locale(langChangeEvent.lang);
       this.renderer.setAttribute(document.querySelector('html'), 'lang', langChangeEvent.lang);
     });
+  }
+
+  collapseNavbar(): void {
+    this.isNavbarCollapsed = true;
+  }
+
+  login(): void {
+    this.router.navigate(['/login']);
+  }
+
+  logout(): void {
+    this.collapseNavbar();
+    this.loginService.logout();
+    this.router.navigate(['']);
   }
 
   private getPageTitle(routeSnapshot: ActivatedRouteSnapshot): string {

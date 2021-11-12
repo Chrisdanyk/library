@@ -1,35 +1,108 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/">
     <div class="sidebar-brand-icon rotate-n-15">
-      <i class="fas fa-laugh-wink"></i>
+      <i class="fas fa-book-reader"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+    <div class="sidebar-brand-text mx-3">Library <sup></sup></div>
   </a>
 
   <!-- Divider -->
   <hr class="sidebar-divider my-0" />
 
   <!-- Nav Item - Dashboard -->
-  <li class="nav-item active">
-    <a class="nav-link" routerLink="/">
+  <li class="nav-item">
+    <a class="nav-link active" routerLink="/">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a
     >
   </li>
 
   <li class="nav-item">
-    <a class="nav-link" routerLink="/book">
-      <i class="fas fa-fw fa-table"></i>
-      <span>Books</span></a
+    <a
+      class="nav-link active"
+      routerLink="book"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="collapseNavbar()"
     >
+      <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
+      <span jhiTranslate="global.menu.entities.book">Book</span>
+    </a>
   </li>
-
+  <li *jhiHasAnyAuthority="['ROLE_CLIENT', 'ROLE_ADMIN']" class="nav-item">
+    <a
+      class="nav-link active"
+      routerLink="borrowed-book"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="collapseNavbar()"
+    >
+      <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
+      <span jhiTranslate="global.menu.entities.borrowedBook">Borrowed Book</span>
+    </a>
+  </li>
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block" />
 
-  <!-- Sidebar Toggler (Sidebar) -->
-  <div class="text-center d-none d-md-inline">
-    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-  </div>
+  <li
+    *jhiHasAnyAuthority="'ROLE_ADMIN'"
+    ngbDropdown
+    class="nav-item dropdown pointer"
+    display="dynamic"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    <a class="nav-link active dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu" data-cy="adminMenu">
+      <span>
+        <fa-icon icon="users-cog"></fa-icon>
+        <span jhiTranslate="global.menu.admin.main">Administration</span>
+      </span>
+    </a>
+    <ul class="dropdown-menu bg-white py-2 collapse-inner rounded" ngbDropdownMenu aria-labelledby="admin-menu">
+      <li>
+        <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
+          <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+          <span jhiTranslate="global.menu.admin.userManagement">User management</span>
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" routerLink="admin/metrics" routerLinkActive="active" (click)="collapseNavbar()">
+          <fa-icon icon="tachometer-alt" [fixedWidth]="true"></fa-icon>
+          <span jhiTranslate="global.menu.admin.metrics">Metrics</span>
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" routerLink="admin/health" routerLinkActive="active" (click)="collapseNavbar()">
+          <fa-icon icon="heart" [fixedWidth]="true"></fa-icon>
+          <span jhiTranslate="global.menu.admin.health">Health</span>
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" routerLink="admin/configuration" routerLinkActive="active" (click)="collapseNavbar()">
+          <fa-icon icon="cogs" [fixedWidth]="true"></fa-icon>
+          <span jhiTranslate="global.menu.admin.configuration">Configuration</span>
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" routerLink="admin/logs" routerLinkActive="active" (click)="collapseNavbar()">
+          <fa-icon icon="tasks" [fixedWidth]="true"></fa-icon>
+          <span jhiTranslate="global.menu.admin.logs">Logs</span>
+        </a>
+      </li>
+      <li *ngIf="openAPIEnabled">
+        <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
+          <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
+          <span jhiTranslate="global.menu.admin.apidocs">API</span>
+        </a>
+      </li>
+      <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+      <li *ngIf="!inProduction">
+        <a class="dropdown-item" href="./h2-console/" target="_tab" (click)="collapseNavbar()">
+          <fa-icon icon="database" [fixedWidth]="true"></fa-icon>
+          <span jhiTranslate="global.menu.admin.database">Database</span>
+        </a>
+      </li>
+    </ul>
+  </li>
 </ul>
