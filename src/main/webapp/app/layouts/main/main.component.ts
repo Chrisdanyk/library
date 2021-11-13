@@ -7,6 +7,8 @@ import * as dayjs from 'dayjs';
 import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from '../../login/login.service';
 import { Account } from '../../core/auth/account.model';
+import { LANGUAGES } from '../../config/language.constants';
+import { SessionStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'jhi-main',
@@ -15,11 +17,13 @@ import { Account } from '../../core/auth/account.model';
 export class MainComponent implements OnInit {
   isNavbarCollapsed = true;
   account: Account | null = null;
+  languages = LANGUAGES;
   private renderer: Renderer2;
 
   constructor(
     private loginService: LoginService,
     private accountService: AccountService,
+    private sessionStorageService: SessionStorageService,
     private titleService: Title,
     private router: Router,
     private translateService: TranslateService,
@@ -37,12 +41,16 @@ export class MainComponent implements OnInit {
         this.updateTitle();
       }
     });
-
     this.translateService.onLangChange.subscribe((langChangeEvent: LangChangeEvent) => {
       this.updateTitle();
       dayjs.locale(langChangeEvent.lang);
       this.renderer.setAttribute(document.querySelector('html'), 'lang', langChangeEvent.lang);
     });
+  }
+
+  changeLanguage(languageKey: string): void {
+    this.sessionStorageService.store('locale', languageKey);
+    this.translateService.use(languageKey);
   }
 
   collapseNavbar(): void {
