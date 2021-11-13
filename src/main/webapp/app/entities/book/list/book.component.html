@@ -3,7 +3,7 @@
     <span jhiTranslate="libraryApp.book.home.title">Books</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+      <button class="btn btn-sm btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="libraryApp.book.home.refreshListLabel">Refresh List</span>
       </button>
@@ -11,7 +11,7 @@
       <button
         id="jh-create-entity"
         data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-book"
+        class="btn btn-sm btn-primary jh-create-entity create-book"
         [routerLink]="['/book/new']"
       >
         <fa-icon icon="plus"></fa-icon>
@@ -29,7 +29,7 @@
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="books && books.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
+    <table class="table text-sm table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
           <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
@@ -38,14 +38,14 @@
           <th scope="col" jhiSortBy="publisherName">
             <span jhiTranslate="libraryApp.book.publisherName">Publisher Name</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="publisherUrl">
-            <span jhiTranslate="libraryApp.book.publisherUrl">Publisher Url</span> <fa-icon icon="sort"></fa-icon>
-          </th>
+          <!--          <th scope="col" jhiSortBy="publisherUrl">-->
+          <!--            <span jhiTranslate="libraryApp.book.publisherUrl">Publisher Url</span> <fa-icon icon="sort"></fa-icon>-->
+          <!--          </th>-->
           <th scope="col" jhiSortBy="publishYear">
             <span jhiTranslate="libraryApp.book.publishYear">Publish Year</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="copies"><span jhiTranslate="libraryApp.book.copies">Copies</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="cover"><span jhiTranslate="libraryApp.book.cover">Cover</span> <fa-icon icon="sort"></fa-icon></th>
+          <!--          <th scope="col" jhiSortBy="cover"><span jhiTranslate="libraryApp.book.cover">Cover</span> <fa-icon icon="sort"></fa-icon></th>-->
           <th scope="col" jhiSortBy="author.login">
             <span jhiTranslate="libraryApp.book.author">Author</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -60,31 +60,41 @@
           <td>{{ book.isbn }}</td>
           <td>{{ book.name }}</td>
           <td>{{ book.publisherName }}</td>
-          <td>{{ book.publisherUrl }}</td>
+          <!--          <td>{{ book.publisherUrl }}</td>-->
           <td>{{ book.publishYear }}</td>
           <td>{{ book.copies }}</td>
-          <td>
-            <a *ngIf="book.cover" (click)="openFile(book.cover, book.coverContentType)">
-              <img [src]="'data:' + book.coverContentType + ';base64,' + book.cover" style="max-height: 30px" alt="book image" />
-            </a>
-            <span *ngIf="book.cover">{{ book.coverContentType }}, {{ byteSize(book.cover) }}</span>
-          </td>
+          <!--          <td>-->
+          <!--            <a *ngIf="book.cover" (click)="openFile(book.cover, book.coverContentType)">-->
+          <!--              <img [src]="'data:' + book.coverContentType + ';base64,' + book.cover" style="max-height: 30px" alt="book image" />-->
+          <!--            </a>-->
+          <!--            <span *ngIf="book.cover">{{ book.coverContentType }}, {{ byteSize(book.cover) }}</span>-->
+          <!--          </td>-->
           <td>
             {{ book.author?.login }}
           </td>
           <td class="text-right">
-            <div class="btn-group">
-              <button type="submit" [routerLink]="['/book', book.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+            <div class="btn-group-sm">
+              <button
+                type="submit"
+                [routerLink]="['/book', book.id, 'view']"
+                class="btn btn-sm btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button type="submit" [routerLink]="['/book', book.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+              <button
+                type="submit"
+                [routerLink]="['/book', book.id, 'edit']"
+                class="btn btn-sm btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>
 
-              <button type="submit" (click)="delete(book)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button type="submit" (click)="delete(book)" class="btn btn-sm btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
               </button>

@@ -28,6 +28,7 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { MenuComponent } from './layouts/menu/menu.component';
+import { LandingComponent } from './layouts/landing/landing.component';
 
 @NgModule({
   imports: [
@@ -59,7 +60,16 @@ import { MenuComponent } from './layouts/menu/menu.component';
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, MenuComponent],
+  declarations: [
+    MainComponent,
+    NavbarComponent,
+    ErrorComponent,
+    PageRibbonComponent,
+    ActiveMenuDirective,
+    FooterComponent,
+    MenuComponent,
+    LandingComponent,
+  ],
   bootstrap: [MainComponent],
 })
 export class AppModule {

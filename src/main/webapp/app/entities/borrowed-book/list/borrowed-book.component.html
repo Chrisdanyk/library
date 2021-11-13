@@ -3,7 +3,7 @@
     <span jhiTranslate="libraryApp.borrowedBook.home.title">Borrowed Books</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+      <button class="btn btn-sm btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="libraryApp.borrowedBook.home.refreshListLabel">Refresh List</span>
       </button>
@@ -11,7 +11,7 @@
       <button
         id="jh-create-entity"
         data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-borrowed-book"
+        class="btn btn-sm btn-primary jh-create-entity create-borrowed-book"
         [routerLink]="['/borrowed-book/new']"
       >
         <fa-icon icon="plus"></fa-icon>
@@ -29,7 +29,7 @@
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="borrowedBooks && borrowedBooks.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
+    <table class="table text-sm table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
           <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
@@ -45,9 +45,9 @@
           <th scope="col" jhiSortBy="book.name">
             <span jhiTranslate="libraryApp.borrowedBook.book">Book</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="client.login">
-            <span jhiTranslate="libraryApp.borrowedBook.client">Client</span> <fa-icon icon="sort"></fa-icon>
-          </th>
+          <!--          <th scope="col" jhiSortBy="client.login">-->
+          <!--            <span jhiTranslate="libraryApp.borrowedBook.client">Client</span> <fa-icon icon="sort"></fa-icon>-->
+          <!--          </th>-->
           <th scope="col"></th>
         </tr>
       </thead>
@@ -64,11 +64,11 @@
               <a [routerLink]="['/book', borrowedBook.book?.id, 'view']">{{ borrowedBook.book?.name }}</a>
             </div>
           </td>
-          <td>
-            {{ borrowedBook.client?.login }}
-          </td>
+          <!--          <td>-->
+          <!--            {{ borrowedBook.client?.login }}-->
+          <!--          </td>-->
           <td class="text-right">
-            <div class="btn-group">
+            <div class="btn-group-sm">
               <button
                 type="submit"
                 [routerLink]="['/borrowed-book', borrowedBook.id, 'view']"
