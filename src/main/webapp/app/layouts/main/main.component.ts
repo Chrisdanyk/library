@@ -64,7 +64,7 @@ export class MainComponent implements OnInit {
   logout(): void {
     this.collapseNavbar();
     this.loginService.logout();
-    this.router.navigate(['']);
+    this.router.navigate(['/login']);
   }
 
   private getPageTitle(routeSnapshot: ActivatedRouteSnapshot): string {
