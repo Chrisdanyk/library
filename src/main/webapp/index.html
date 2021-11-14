@@ -133,6 +133,17 @@ e.src='//www.google-analytics.com/analytics.js';
 r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
 ga('create','UA-XXXXX-X');ga('send','pageview');
 </script>-->
+    <script>
+      function toggleMenu() {
+        console.log('style:', document.getElementById('menu').style.display);
+        let style = document.getElementById('menu').style.display;
+        if (style === 'flex') {
+          document.getElementById('menu').style.display = 'none';
+        } else {
+          document.getElementById('menu').style.display = 'flex';
+        }
+      }
+    </script>
     <script src="content/template/vendor/jquery/jquery.min.js"></script>
     <script src="content/template/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="content/template/vendor/jquery-easing/jquery.easing.min.js"></script>
