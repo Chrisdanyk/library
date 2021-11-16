@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { LoginService } from 'app/login/login.service';
 import { AccountService } from 'app/core/auth/account.service';
+import { Account } from '../core/auth/account.model';
 
 @Component({
   selector: 'jhi-login',
@@ -12,6 +13,7 @@ import { AccountService } from 'app/core/auth/account.service';
 export class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('username', { static: false })
   username!: ElementRef;
+  account: Account | null = null;
 
   authenticationError = false;
 
@@ -30,6 +32,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // if already authenticated then navigate to home page
+    this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
     this.accountService.identity().subscribe(() => {
       if (this.accountService.isAuthenticated()) {
         this.router.navigate(['']);
@@ -53,7 +56,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
           this.authenticationError = false;
           if (!this.router.getCurrentNavigation()) {
             // There were no routing during login (eg from navigationToStoredUrl)
-            this.router.navigate(['']);
+            // this.router.navigate(['']);
+            if (this.account?.authorities.includes('ROLE_ADMIN')) {
+              this.router.navigate(['/admin/user-management']);
+            }
+            if (this.account?.authorities.includes('ROLE_CLIENT')) {
+              this.router.navigate(['/borrowed-book']);
+            }
           }
         },
         () => (this.authenticationError = true)

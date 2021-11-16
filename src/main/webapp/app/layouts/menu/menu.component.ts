@@ -46,4 +46,15 @@ export class MenuComponent implements OnInit {
   collapseNavbar(): void {
     this.isNavbarCollapsed = true;
   }
+
+  goToDashboard(): string {
+    let path = '';
+    if (this.account?.authorities.includes('ROLE_ADMIN')) {
+      path = '/admin/user-management';
+    }
+    if (this.account?.authorities.includes('ROLE_CLIENT')) {
+      path = '/borrowed-book';
+    }
+    return path;
+  }
 }
