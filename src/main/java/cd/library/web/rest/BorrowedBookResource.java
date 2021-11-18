@@ -158,22 +158,17 @@ public class BorrowedBookResource {
     @GetMapping("/borrowed-books")
     public ResponseEntity<List<BorrowedBook>> getAllBorrowedBooks(Pageable pageable) {
         log.debug("REST request to get a page of BorrowedBooks");
-        /*
-        Page<BorrowedBook> page = null;
-        Set<Authority> authorities = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get()).get().getAuthorities();
+        Page<BorrowedBook> page = borrowedBookService.findAll(pageable);
+        Set<Authority> authorities = userService
+            .getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get())
+            .get()
+            .getAuthorities();
         log.warn("auth ->" + authorities);
 
-        if (authorities.contains(AuthoritiesConstants.ADMIN)) {
-            page = borrowedBookService.findAll(pageable);
-        }
-        if (authorities.contains(AuthoritiesConstants.CLIENT)) {
+        if (authorities.stream().map(Authority::getName).anyMatch(role -> role.equals(AuthoritiesConstants.CLIENT))) {
             page = borrowedBookService.findByClientIsCurrentUser(pageable);
-
         }
-       if (authorities.contains(AuthoritiesConstants.CLIENT) && authorities.contains(AuthoritiesConstants.ADMIN)) {
-            page = borrowedBookService.findAll(pageable);
-        }*/
-        Page<BorrowedBook> page = borrowedBookService.findByClientIsCurrentUser(pageable);
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
