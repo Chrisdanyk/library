@@ -11,6 +11,7 @@
       "created": "Un nouveau Book a été créé avec l'identifiant {{ param }}",
       "updated": "Le Book avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Book avec l'identifiant {{ param }} a été supprimé",
+      "borrow": "Emprunter",
       "delete": {
         "question": "Etes-vous certain de vouloir supprimer le Book {{ id }} ?"
       },

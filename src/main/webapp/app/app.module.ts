@@ -29,6 +29,7 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { MenuComponent } from './layouts/menu/menu.component';
 import { LandingComponent } from './layouts/landing/landing.component';
+import { BorrowComponent } from './layouts/borrow/borrow.component';
 
 @NgModule({
   imports: [
@@ -69,6 +70,7 @@ import { LandingComponent } from './layouts/landing/landing.component';
     FooterComponent,
     MenuComponent,
     LandingComponent,
+    BorrowComponent,
   ],
   bootstrap: [MainComponent],
 })

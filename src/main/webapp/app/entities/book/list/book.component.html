@@ -32,22 +32,37 @@
     <table class="table text-sm table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
-          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="isbn"><span jhiTranslate="libraryApp.book.isbn">Isbn</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="name"><span jhiTranslate="libraryApp.book.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="id">
+            <span jhiTranslate="global.field.id">ID</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="isbn">
+            <span jhiTranslate="libraryApp.book.isbn">Isbn</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="name">
+            <span jhiTranslate="libraryApp.book.name">Name</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="publisherName">
-            <span jhiTranslate="libraryApp.book.publisherName">Publisher Name</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="libraryApp.book.publisherName">Publisher Name</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <!--          <th scope="col" jhiSortBy="publisherUrl">-->
           <!--            <span jhiTranslate="libraryApp.book.publisherUrl">Publisher Url</span> <fa-icon icon="sort"></fa-icon>-->
           <!--          </th>-->
           <th scope="col" jhiSortBy="publishYear">
-            <span jhiTranslate="libraryApp.book.publishYear">Publish Year</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="libraryApp.book.publishYear">Publish Year</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="copies"><span jhiTranslate="libraryApp.book.copies">Copies</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="copies">
+            <span jhiTranslate="libraryApp.book.copies">Copies</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
           <!--          <th scope="col" jhiSortBy="cover"><span jhiTranslate="libraryApp.book.cover">Cover</span> <fa-icon icon="sort"></fa-icon></th>-->
           <th scope="col" jhiSortBy="author.login">
-            <span jhiTranslate="libraryApp.book.author">Author</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="libraryApp.book.author">Author</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
         </tr>
@@ -74,6 +89,10 @@
           </td>
           <td class="text-right">
             <div class="btn-group-sm">
+              <button type="submit" [routerLink]="['/book', book.id, 'borrow']" class="btn btn-sm btn-primary btn-sm">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="libraryApp.book.borrow">Borrow</span>
+              </button>
               <button
                 type="submit"
                 [routerLink]="['/book', book.id, 'view']"

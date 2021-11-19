@@ -72,6 +72,14 @@ public class BorrowedBookResource {
         if (borrowedBook.getId() != null) {
             throw new BadRequestAlertException("A new borrowedBook cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        Set<Authority> authorities = userService
+            .getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get())
+            .get()
+            .getAuthorities();
+
+        if (authorities.stream().map(Authority::getName).anyMatch(role -> role.equals(AuthoritiesConstants.CLIENT))) {
+            borrowedBook.setClient(userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get()).get());
+        }
         BorrowedBook result = borrowedBookService.save(borrowedBook);
         return ResponseEntity
             .created(new URI("/api/borrowed-books/" + result.getId()))
