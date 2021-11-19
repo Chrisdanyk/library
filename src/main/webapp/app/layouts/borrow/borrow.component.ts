@@ -30,7 +30,7 @@ export class BorrowComponent implements OnInit {
     id: [],
     borrowDate: [],
     returnDate: [],
-    status: [null, [Validators.required]],
+    status: [],
     book: [],
     client: [],
   });
@@ -63,7 +63,7 @@ export class BorrowComponent implements OnInit {
       this.subscribeToSaveResponse(this.borrowedBookService.update(borrowedBook));
     } else {
       borrowedBook.book = this.book;
-      // borrowedBook.status=Status.BORROWED;
+      borrowedBook.status = Status.BORROWED;
       borrowedBook.borrowDate = dayjs(new Date());
       this.subscribeToSaveResponse(this.borrowedBookService.create(borrowedBook));
     }
