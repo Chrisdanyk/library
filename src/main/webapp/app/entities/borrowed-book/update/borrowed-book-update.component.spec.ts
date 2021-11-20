@@ -56,9 +56,11 @@ describe('BorrowedBook Management Update Component', () => {
 
       activatedRoute.data = of({ borrowedBook });
       comp.ngOnInit();
-
+      // @ts-ignore
       expect(bookService.query).toHaveBeenCalled();
+      // @ts-ignore
       expect(bookService.addBookToCollectionIfMissing).toHaveBeenCalledWith(bookCollection, book);
+      // @ts-ignore
       expect(comp.booksCollection).toEqual(expectedCollection);
     });
 
@@ -76,8 +78,11 @@ describe('BorrowedBook Management Update Component', () => {
       activatedRoute.data = of({ borrowedBook });
       comp.ngOnInit();
 
+      // @ts-ignore
       expect(userService.query).toHaveBeenCalled();
+      // @ts-ignore
       expect(userService.addUserToCollectionIfMissing).toHaveBeenCalledWith(userCollection, ...additionalUsers);
+      // @ts-ignore
       expect(comp.usersSharedCollection).toEqual(expectedCollection);
     });
 
@@ -90,9 +95,11 @@ describe('BorrowedBook Management Update Component', () => {
 
       activatedRoute.data = of({ borrowedBook });
       comp.ngOnInit();
-
+      // @ts-ignore
       expect(comp.editForm.value).toEqual(expect.objectContaining(borrowedBook));
+      // @ts-ignore
       expect(comp.booksCollection).toContain(book);
+      // @ts-ignore
       expect(comp.usersSharedCollection).toContain(client);
     });
   });
@@ -109,13 +116,17 @@ describe('BorrowedBook Management Update Component', () => {
 
       // WHEN
       comp.save();
+      // @ts-ignore
       expect(comp.isSaving).toEqual(true);
       saveSubject.next(new HttpResponse({ body: borrowedBook }));
       saveSubject.complete();
 
       // THEN
+      // @ts-ignore
       expect(comp.previousState).toHaveBeenCalled();
+      // @ts-ignore
       expect(borrowedBookService.update).toHaveBeenCalledWith(borrowedBook);
+      // @ts-ignore
       expect(comp.isSaving).toEqual(false);
     });
 
@@ -130,13 +141,17 @@ describe('BorrowedBook Management Update Component', () => {
 
       // WHEN
       comp.save();
+      // @ts-ignore
       expect(comp.isSaving).toEqual(true);
       saveSubject.next(new HttpResponse({ body: borrowedBook }));
       saveSubject.complete();
 
       // THEN
+      // @ts-ignore
       expect(borrowedBookService.create).toHaveBeenCalledWith(borrowedBook);
+      // @ts-ignore
       expect(comp.isSaving).toEqual(false);
+      // @ts-ignore
       expect(comp.previousState).toHaveBeenCalled();
     });
 
@@ -151,12 +166,16 @@ describe('BorrowedBook Management Update Component', () => {
 
       // WHEN
       comp.save();
+      // @ts-ignore
       expect(comp.isSaving).toEqual(true);
       saveSubject.error('This is an error!');
 
       // THEN
+      // @ts-ignore
       expect(borrowedBookService.update).toHaveBeenCalledWith(borrowedBook);
+      // @ts-ignore
       expect(comp.isSaving).toEqual(false);
+      // @ts-ignore
       expect(comp.previousState).not.toHaveBeenCalled();
     });
   });
@@ -166,6 +185,7 @@ describe('BorrowedBook Management Update Component', () => {
       it('Should return tracked Book primary key', () => {
         const entity = { id: 123 };
         const trackResult = comp.trackBookById(0, entity);
+        // @ts-ignore
         expect(trackResult).toEqual(entity.id);
       });
     });
@@ -174,6 +194,7 @@ describe('BorrowedBook Management Update Component', () => {
       it('Should return tracked User primary key', () => {
         const entity = { id: 123 };
         const trackResult = comp.trackUserById(0, entity);
+        // @ts-ignore
         expect(trackResult).toEqual(entity.id);
       });
     });

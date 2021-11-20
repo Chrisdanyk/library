@@ -10,6 +10,7 @@
 
       <button
         id="jh-create-entity"
+        *jhiHasAnyAuthority="'ROLE_ADMIN'"
         data-cy="entityCreateButton"
         class="btn btn-sm btn-primary jh-create-entity create-borrowed-book"
         [routerLink]="['/borrowed-book/new']"
@@ -70,7 +71,18 @@
           <td class="text-right">
             <div class="btn-group-sm">
               <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
                 type="submit"
+                [routerLink]="['/borrowed-book', borrowedBook.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="libraryApp.borrowedBook.return">Return</span>
+              </button>
+              <button
+                type="submit"
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
                 [routerLink]="['/borrowed-book', borrowedBook.id, 'view']"
                 class="btn btn-info btn-sm"
                 data-cy="entityDetailsButton"
@@ -81,6 +93,7 @@
 
               <button
                 type="submit"
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
                 [routerLink]="['/borrowed-book', borrowedBook.id, 'edit']"
                 class="btn btn-primary btn-sm"
                 data-cy="entityEditButton"
@@ -89,7 +102,13 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>
 
-              <button type="submit" (click)="delete(borrowedBook)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button
+                type="submit"
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                (click)="delete(borrowedBook)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
               </button>
