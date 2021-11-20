@@ -1,10 +1,12 @@
 package cd.library.web.rest;
 
 import cd.library.domain.Authority;
+import cd.library.domain.Book;
 import cd.library.domain.BorrowedBook;
 import cd.library.repository.BorrowedBookRepository;
 import cd.library.security.AuthoritiesConstants;
 import cd.library.security.SecurityUtils;
+import cd.library.service.BookService;
 import cd.library.service.BorrowedBookService;
 import cd.library.service.UserService;
 import cd.library.web.rest.errors.BadRequestAlertException;
@@ -48,15 +50,18 @@ public class BorrowedBookResource {
 
     private final BorrowedBookRepository borrowedBookRepository;
     private final UserService userService;
+    private final BookService bookService;
 
     public BorrowedBookResource(
         BorrowedBookService borrowedBookService,
         BorrowedBookRepository borrowedBookRepository,
-        UserService userService
+        UserService userService,
+        BookService bookService
     ) {
         this.borrowedBookService = borrowedBookService;
         this.borrowedBookRepository = borrowedBookRepository;
         this.userService = userService;
+        this.bookService = bookService;
     }
 
     /**
@@ -80,10 +85,35 @@ public class BorrowedBookResource {
         if (authorities.stream().map(Authority::getName).anyMatch(role -> role.equals(AuthoritiesConstants.CLIENT))) {
             borrowedBook.setClient(userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get()).get());
         }
+
         BorrowedBook result = borrowedBookService.save(borrowedBook);
         return ResponseEntity
             .created(new URI("/api/borrowed-books/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    @PutMapping("/borrowed-books/{id}/return")
+    public ResponseEntity<BorrowedBook> returnBook(
+        @PathVariable(value = "id", required = false) final Long id,
+        @Valid @RequestBody BorrowedBook borrowedBook
+    ) throws URISyntaxException {
+        log.debug("REST request to update BorrowedBook : {}, {}", id, borrowedBook);
+        if (borrowedBook.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        if (!Objects.equals(id, borrowedBook.getId())) {
+            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        }
+
+        if (!borrowedBookRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        BorrowedBook result = borrowedBookService.returnBook(borrowedBook);
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, borrowedBook.getId().toString()))
             .body(result);
     }
 
