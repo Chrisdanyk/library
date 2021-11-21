@@ -22,4 +22,10 @@ export class BorrowedBookReturnDialogComponent {
       this.activeModal.close('deleted');
     });
   }
+
+  confirmReturn(id: number): void {
+    this.borrowedBookService.returnBook(id).subscribe(() => {
+      this.activeModal.close('returned');
+    });
+  }
 }

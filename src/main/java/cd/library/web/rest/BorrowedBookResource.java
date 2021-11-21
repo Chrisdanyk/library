@@ -93,11 +93,9 @@ public class BorrowedBookResource {
             .body(result);
     }
 
-    @PutMapping("/borrowed-books/{id}/return")
-    public ResponseEntity<BorrowedBook> returnBook(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody BorrowedBook borrowedBook
-    ) throws URISyntaxException {
+    @GetMapping("/borrowed-books/{id}/return")
+    public ResponseEntity<BorrowedBook> returnBook(@PathVariable(value = "id", required = false) final Long id) throws URISyntaxException {
+        BorrowedBook borrowedBook = this.borrowedBookService.findOne(id).get();
         log.debug("REST request to update BorrowedBook : {}, {}", id, borrowedBook);
         if (borrowedBook.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

@@ -1,6 +1,6 @@
-<form *ngIf="borrowedBook" name="deleteForm" (ngSubmit)="confirmDelete(borrowedBook.id!)">
+<form *ngIf="borrowedBook" name="deleteForm" (ngSubmit)="confirmReturn(borrowedBook.id!)">
   <div class="modal-header">
-    <h4 class="modal-title" data-cy="borrowedBookDeleteDialogHeading" jhiTranslate="entity.delete.title">Confirm delete operation</h4>
+    <h4 class="modal-title" data-cy="borrowedBookDeleteDialogHeading" jhiTranslate="libraryApp.borrowedBook.return">Return</h4>
 
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
   </div>
@@ -22,8 +22,8 @@
       <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
     </button>
 
-    <button id="jhi-confirm-delete-borrowedBook" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
-      <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">Delete</span>
+    <button id="jhi-confirm-delete-borrowedBook" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-primary">
+      <fa-icon icon="check"></fa-icon>&nbsp;<span jhiTranslate="libraryApp.borrowedBook.return">Return</span>
     </button>
   </div>
 </form>

@@ -45,7 +45,7 @@ public class BorrowedBookService {
 
     public BorrowedBook returnBook(BorrowedBook borrowedBook) {
         log.debug("Request to return BorrowedBook : {}", borrowedBook);
-        Book book = bookRepository.getOne(borrowedBook.getBook().getId());
+        Book book = bookRepository.findById(borrowedBook.getBook().getId()).get();
         book.setCopies(book.getCopies() + 1);
         borrowedBook.setStatus(Status.RETURNED);
         return borrowedBookRepository.save(borrowedBook);

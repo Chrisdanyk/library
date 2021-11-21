@@ -65,12 +65,10 @@
               <a [routerLink]="['/book', borrowedBook.book?.id, 'view']">{{ borrowedBook.book?.name }}</a>
             </div>
           </td>
-          <!--          <td>-->
-          <!--            {{ borrowedBook.client?.login }}-->
-          <!--          </td>-->
+
           <td class="text-right">
             <div class="btn-group-sm">
-              <button
+              <!--<button
                 *jhiHasAnyAuthority="'ROLE_ADMIN'"
                 type="submit"
                 [routerLink]="['/borrowed-book', borrowedBook.id, 'edit']"
@@ -79,7 +77,18 @@
               >
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="libraryApp.borrowedBook.return">Return</span>
+              </button>-->
+              <button
+                type="submit"
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                (click)="returnBook(borrowedBook)"
+                class="btn btn-primary btn-sm"
+                data-cy="entityDeleteButton"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="libraryApp.borrowedBook.return">Return</span>
               </button>
+
               <button
                 type="submit"
                 *jhiHasAnyAuthority="'ROLE_ADMIN'"
