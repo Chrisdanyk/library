@@ -14,6 +14,7 @@ import { DataUtils } from 'app/core/util/data-util.service';
 @Component({
   selector: 'jhi-book',
   templateUrl: './book.component.html',
+  styleUrls: ['./book.component.css'],
 })
 export class BookComponent implements OnInit {
   books?: IBook[];
