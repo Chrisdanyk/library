@@ -9,6 +9,7 @@ import { IBorrowedBook } from '../borrowed-book.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { BorrowedBookService } from '../service/borrowed-book.service';
 import { BorrowedBookDeleteDialogComponent } from '../delete/borrowed-book-delete-dialog.component';
+import { BorrowedBookReturnDialogComponent } from '../return/borrowed-book-return-dialog.component';
 
 @Component({
   selector: 'jhi-borrowed-book',
@@ -67,6 +68,17 @@ export class BorrowedBookComponent implements OnInit {
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
+        this.loadPage();
+      }
+    });
+  }
+
+  returnBook(borrowedBook: IBorrowedBook): void {
+    const modalRef = this.modalService.open(BorrowedBookReturnDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.borrowedBook = borrowedBook;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'returned') {
         this.loadPage();
       }
     });

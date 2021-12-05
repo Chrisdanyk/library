@@ -57,6 +57,13 @@ export class BorrowedBookService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  returnBook(id: number): Observable<EntityResponseType> {
+    // const copy = this.convertDateFromClient(borrowedBook);
+    return this.http
+      .get<any>(`${this.resourceUrl}/${id}/return`, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
   addBorrowedBookToCollectionIfMissing(
     borrowedBookCollection: IBorrowedBook[],
     ...borrowedBooksToCheck: (IBorrowedBook | null | undefined)[]

@@ -42,7 +42,9 @@ describe('BorrowedBook routing resolve service', () => {
       });
 
       // THEN
+      // @ts-ignore
       expect(service.find).toBeCalledWith(123);
+      // @ts-ignore
       expect(resultBorrowedBook).toEqual({ id: 123 });
     });
 
@@ -57,7 +59,9 @@ describe('BorrowedBook routing resolve service', () => {
       });
 
       // THEN
+      // @ts-ignore
       expect(service.find).not.toBeCalled();
+      // @ts-ignore
       expect(resultBorrowedBook).toEqual(new BorrowedBook());
     });
 
@@ -72,8 +76,11 @@ describe('BorrowedBook routing resolve service', () => {
       });
 
       // THEN
+      // @ts-ignore
       expect(service.find).toBeCalledWith(123);
+      // @ts-ignore
       expect(resultBorrowedBook).toEqual(undefined);
+      // @ts-ignore
       expect(mockRouter.navigate).toHaveBeenCalledWith(['404']);
     });
   });

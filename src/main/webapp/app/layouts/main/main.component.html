@@ -1,13 +1,135 @@
-<jhi-page-ribbon></jhi-page-ribbon>
-
-<div>
+<!--<jhi-page-ribbon></jhi-page-ribbon>
+-->
+<!--<div>
   <router-outlet name="navbar"></router-outlet>
+</div>-->
+
+<div style="display: flex !important" id="wrapper">
+  <jhi-menu id="menu" style="display: flex !important" *ngIf="account !== null"></jhi-menu>
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Main Content -->
+    <div id="content">
+      <!-- Topbar -->
+      <nav
+        *ngIf="account !== null"
+        class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+        [ngSwitch]="account !== null"
+      >
+        <!-- Sidebar Toggle (Topbar) -->
+        <!-- Sidebar Toggle (Topbar) -->
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" onclick="toggleMenu()">
+          <i class="fa fa-bars"></i>
+        </button>
+
+        <!-- Topbar Search -->
+
+        <!-- Topbar Navbar -->
+        <ul class="navbar-nav ml-auto">
+          <li ngbDropdown class="nav-item dropdown no-arrow" display="dynamic" *ngIf="languages && languages.length > 1">
+            <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown">
+              <span>
+                <fa-icon icon="flag"></fa-icon>
+                <span jhiTranslate="global.menu.language">Language</span>
+              </span>
+            </a>
+            <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="languagesnavBarDropdown">
+              <li *ngFor="let language of languages">
+                <a
+                  class="dropdown-item"
+                  [jhiActiveMenu]="language"
+                  href="javascript:void(0);"
+                  (click)="changeLanguage(language); collapseNavbar()"
+                  >{{ language | findLanguageFromKey }}</a
+                >
+              </li>
+            </ul>
+          </li>
+          <div *ngSwitchCase="true" class="topbar-divider d-none d-sm-block"></div>
+          <!-- Nav Item - User Information -->
+          <li class="nav-item dropdown no-arrow">
+            <a
+              *ngSwitchCase="true"
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="userDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ account?.email }}</span>
+              <img class="img-profile rounded-circle" src="content/template/img/undraw_profile.svg" />
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+              <a *ngSwitchCase="true" class="dropdown-item" routerLink="account/settings" (click)="collapseNavbar()" data-cy="settings">
+                <fa-icon icon="wrench" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.account.settings">Settings</span>
+              </a>
+              <a *ngSwitchCase="true" class="dropdown-item" routerLink="account/password" (click)="collapseNavbar()" data-cy="passwordItem">
+                <fa-icon icon="lock" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.account.password">Password</span>
+              </a>
+
+              <a *ngSwitchCase="true" class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-dark-400"></i>
+                <span jhiTranslate="global.menu.account.logout">Sign out</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <div style="margin-top: 20px" class="container-fluid">
+        <div class="row">
+          <div class="container-fluid">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+              <div class="card shadow mb-4">
+                <div class="card-body">
+                  <div class="">
+                    <router-outlet></router-outlet>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <jhi-footer *ngIf="account !== null"></jhi-footer>
+  </div>
+</div>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <a class="btn btn-primary" (click)="logout()" data-dismiss="modal">Logout</a>
+      </div>
+    </div>
+  </div>
 </div>
 
+<!--
 <div class="container-fluid">
   <div class="card jh-card">
     <router-outlet></router-outlet>
   </div>
 
   <jhi-footer></jhi-footer>
-</div>
+</div>-->

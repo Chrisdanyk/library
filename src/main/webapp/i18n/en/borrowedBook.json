@@ -22,7 +22,8 @@
       "returnDate": "Return Date",
       "status": "Status",
       "book": "Book",
-      "client": "Client"
+      "client": "Client",
+      "return": "Return"
     }
   }
 }

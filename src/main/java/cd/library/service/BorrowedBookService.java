@@ -1,14 +1,15 @@
 package cd.library.service;
 
+import cd.library.domain.Book;
 import cd.library.domain.BorrowedBook;
+import cd.library.domain.enumeration.Status;
+import cd.library.repository.BookRepository;
 import cd.library.repository.BorrowedBookRepository;
-import cd.library.security.AuthoritiesConstants;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,9 +23,11 @@ public class BorrowedBookService {
     private final Logger log = LoggerFactory.getLogger(BorrowedBookService.class);
 
     private final BorrowedBookRepository borrowedBookRepository;
+    private final BookRepository bookRepository;
 
-    public BorrowedBookService(BorrowedBookRepository borrowedBookRepository) {
+    public BorrowedBookService(BorrowedBookRepository borrowedBookRepository, BookRepository bookRepository) {
         this.borrowedBookRepository = borrowedBookRepository;
+        this.bookRepository = bookRepository;
     }
 
     /**
@@ -35,6 +38,16 @@ public class BorrowedBookService {
      */
     public BorrowedBook save(BorrowedBook borrowedBook) {
         log.debug("Request to save BorrowedBook : {}", borrowedBook);
+        Book book = bookRepository.getOne(borrowedBook.getBook().getId());
+        if (book.getCopies() > 0) book.setCopies(book.getCopies() - 1);
+        return borrowedBookRepository.save(borrowedBook);
+    }
+
+    public BorrowedBook returnBook(BorrowedBook borrowedBook) {
+        log.debug("Request to return BorrowedBook : {}", borrowedBook);
+        Book book = bookRepository.findById(borrowedBook.getBook().getId()).get();
+        book.setCopies(book.getCopies() + 1);
+        borrowedBook.setStatus(Status.RETURNED);
         return borrowedBookRepository.save(borrowedBook);
     }
 

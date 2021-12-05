@@ -35,4 +35,8 @@ export class UserService {
     }
     return userCollection;
   }
+
+  /*find(login: string | undefined) {
+    return undefined;
+  }*/
 }
