@@ -1,7 +1,11 @@
-# library
+# library Screenshots
+![Screen_Shot_2021-11-15_at_2.11.56_AM](/uploads/f529850cb6fa070d12b02dd557117382/Screen_Shot_2021-11-15_at_2.11.56_AM.png)
 
-This application was generated using JHipster 7.3.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v7.3.1](https://www.jhipster.tech/documentation-archive/v7.3.1).
+![Screen_Shot_2021-12-05_at_11.36.33](/uploads/430a9b0fbb236d754fdb823d082e8b5e/Screen_Shot_2021-12-05_at_11.36.33.png)
 
+![Screen_Shot_2021-12-05_at_11.41.07](/uploads/751f6e4f42349ecd501044a92474da1e/Screen_Shot_2021-12-05_at_11.41.07.png)
+
+![Screen_Shot_2021-12-05_at_11.42.21](/uploads/eb41d6e52918b54a40a4a003626093f3/Screen_Shot_2021-12-05_at_11.42.21.png)
 ## Development
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
