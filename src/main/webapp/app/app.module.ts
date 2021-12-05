@@ -30,7 +30,7 @@ import { ErrorComponent } from './layouts/error/error.component';
 import { MenuComponent } from './layouts/menu/menu.component';
 import { LandingComponent } from './layouts/landing/landing.component';
 import { BorrowComponent } from './layouts/borrow/borrow.component';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   imports: [
     BrowserModule,

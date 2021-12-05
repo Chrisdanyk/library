@@ -156,6 +156,36 @@
 </div>
 -->
 <div class="container">
+  <div class="row">
+    <div class="col-md-4 offset-8"></div>
+  </div>
+  <h2 id="page-heading" data-cy="BookHeading">
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-sm btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="libraryApp.book.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN'"
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-sm btn-primary jh-create-entity create-book"
+        [routerLink]="['/book/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="libraryApp.book.home.createLabel"> Create a new Book </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="books?.length === 0">
+    <span jhiTranslate="libraryApp.book.home.notFound">No books found</span>
+  </div>
   <div class="row" *ngIf="books && books.length > 0">
     <div class="col-md-4" *ngFor="let book of books; trackBy: trackId" data-cy="entityTable">
       <div class="card" style="margin-bottom: 1rem">
