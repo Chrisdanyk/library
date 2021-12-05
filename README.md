@@ -1,11 +1,14 @@
 # library Screenshots
-![Screen_Shot_2021-11-15_at_2.11.56_AM](/uploads/f529850cb6fa070d12b02dd557117382/Screen_Shot_2021-11-15_at_2.11.56_AM.png)
+<img width="1350" alt="Screen Shot 2021-12-05 at 11 55 58" src="https://user-images.githubusercontent.com/16597307/144741877-9b774346-12c8-43f9-a0fb-5b3e3b7b24ce.png">
 
-![Screen_Shot_2021-12-05_at_11.36.33](/uploads/430a9b0fbb236d754fdb823d082e8b5e/Screen_Shot_2021-12-05_at_11.36.33.png)
+<img width="1327" alt="Screen Shot 2021-12-05 at 11 36 33" src="https://user-images.githubusercontent.com/16597307/144741891-9b727e15-f06a-4525-a8e6-a604e22c92e8.png">
 
-![Screen_Shot_2021-12-05_at_11.41.07](/uploads/751f6e4f42349ecd501044a92474da1e/Screen_Shot_2021-12-05_at_11.41.07.png)
 
-![Screen_Shot_2021-12-05_at_11.42.21](/uploads/eb41d6e52918b54a40a4a003626093f3/Screen_Shot_2021-12-05_at_11.42.21.png)
+<img width="1360" alt="Screen Shot 2021-12-05 at 11 41 07" src="https://user-images.githubusercontent.com/16597307/144741904-1d26e0a8-62d7-470d-895a-e04947a987f0.png">
+
+
+<img width="1360" alt="Screen Shot 2021-12-05 at 11 42 21" src="https://user-images.githubusercontent.com/16597307/144741916-927a0c04-1661-462e-bc2f-9ce099ce6397.png">
+
 ## Development
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
